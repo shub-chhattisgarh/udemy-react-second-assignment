@@ -15,10 +15,21 @@ class App extends Component{
     });
   };
 
+  onCharacterClickHandler = event => {
+    const index = parseInt(event.target.dataset.index);
+    const input = this.state.input;
+    const newInput = input.slice(0, index) + input.slice(index + 1);
+
+    this.setState({
+      input: newInput
+    });
+
+  };
+
   getCharacterArray = text => {
     const charArray = text.split('');
     const charArrayModified = charArray.map((character, index) => (
-      <Char character={character} key={index}/>
+      <Char character={character} key={index} index={index} click={this.onCharacterClickHandler}/>
     ));
     return charArrayModified;
   }
